@@ -1,5 +1,5 @@
 ---
-title: "Benvenuto sul mio blog: costruiamo un assistente AI personale"
+title: "Welkomme and dear agent friend"
 date: 2026-04-26
 description: "Il primo post del blog: chi sono, di cosa scriverò, e come ho progettato un assistente AI personale self-hosted con Python, Telegram e OpenRouter."
 tags: ["ai", "python", "telegram", "self-hosted", "llm"]
