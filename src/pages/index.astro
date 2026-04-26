@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import PostCard from '@components/PostCard.astro';
+import Pagination from '@components/Pagination.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { readingTime } from '@utils/reading-time';
+
+const allPosts = await getCollection('posts', (post) => {
+  if (import.meta.env.PROD) return !post.data.draft;
+  return true;
+});
+const sorted = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const PER_PAGE = 10;
+const totalPages = Math.ceil(sorted.length / PER_PAGE) || 1;
+const currentPage = 1;
+const prevUrl = undefined;
+const nextUrl = totalPages > 1 ? '/page/2' : undefined;
+const posts = sorted.slice(0, PER_PAGE);
+---
+
+<BaseLayout title="My Tech Blog" description="A technical blog about architecture, microservices, and databases.">
+  <div class="mt-8">
+    {posts.map((post) => (
+      <PostCard
+        title={post.data.title}
+        slug={post.slug}
+        date={post.data.date}
+        description={post.data.description}
+        tags={post.data.tags}
+        readingTime={readingTime(post.body)}
+      />
+    ))}
+  </div>
+  <Pagination currentPage={currentPage} totalPages={totalPages} prevUrl={prevUrl} nextUrl={nextUrl} />
+</BaseLayout>

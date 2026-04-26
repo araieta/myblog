@@ -1,0 +1,28 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  prevUrl: string | undefined;
+  nextUrl: string | undefined;
+}
+
+const { currentPage, totalPages, prevUrl, nextUrl } = Astro.props;
+---
+
+<nav class="mt-8 flex items-center justify-between text-sm text-zinc-500">
+  <div>
+    {prevUrl ? (
+      <a href={prevUrl} class="text-blue-600 dark:text-blue-400">← Newer posts</a>
+    ) : (
+      <span />
+    )}
+  </div>
+  <span>Page {currentPage} of {totalPages}</span>
+  <div>
+    {nextUrl ? (
+      <a href={nextUrl} class="text-blue-600 dark:text-blue-400">Older posts →</a>
+    ) : (
+      <span />
+    )}
+  </div>
+</nav>

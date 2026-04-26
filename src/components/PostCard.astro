@@ -1,0 +1,28 @@
+---
+interface Props {
+  title: string;
+  slug: string;
+  date: Date;
+  description: string;
+  tags: string[];
+  readingTime: string;
+}
+
+import { formatDate } from '@utils/format-date';
+const { title, slug, date, description, tags, readingTime } = Astro.props;
+---
+
+<article class="py-8 border-b border-zinc-200 dark:border-zinc-800">
+  <div class="flex flex-wrap gap-2 mb-3">
+    {tags.map((tag) => (
+      <a href={`/tag/${tag}`} class="rounded-full bg-zinc-100 dark:bg-zinc-800 px-2 py-0.5 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:text-blue-600 dark:hover:text-blue-400">
+        {tag}
+      </a>
+    ))}
+  </div>
+  <h2 class="text-xl font-semibold mb-2 text-green-600 dark:text-green-400">
+    <a href={`/${slug}`} class="hover:text-blue-600 dark:hover:text-blue-400">{title}</a>
+  </h2>
+  <p class="text-base leading-7 text-zinc-600 dark:text-zinc-400 mb-3">{description}</p>
+  <p class="text-sm text-zinc-500">{formatDate(date)} · {readingTime}</p>
+</article>

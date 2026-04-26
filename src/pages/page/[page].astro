@@ -1,0 +1,51 @@
+---
+import { getCollection } from 'astro:content';
+import PostCard from '@components/PostCard.astro';
+import Pagination from '@components/Pagination.astro';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import { readingTime } from '@utils/reading-time';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('posts', (post) => {
+    if (import.meta.env.PROD) return !post.data.draft;
+    return true;
+  });
+  const sorted = allPosts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  const PER_PAGE = 10;
+  const totalPages = Math.ceil(sorted.length / PER_PAGE) || 1;
+  const paths = [];
+  for (let pageNum = 2; pageNum <= totalPages; pageNum++) {
+    const start = (pageNum - 1) * PER_PAGE;
+    const end = start + PER_PAGE;
+    paths.push({
+      params: { page: pageNum.toString() },
+      props: {
+        posts: sorted.slice(start, end),
+        currentPage: pageNum,
+        totalPages,
+        prevUrl: pageNum > 2 ? `/page/${pageNum - 1}` : '/',
+        nextUrl: pageNum < totalPages ? `/page/${pageNum + 1}` : undefined,
+      },
+    });
+  }
+  return paths;
+}
+
+const { posts, currentPage, totalPages, prevUrl, nextUrl } = Astro.props;
+---
+
+<BaseLayout title={`My Tech Blog - Page ${currentPage}`} description="A technical blog about architecture, microservices, and databases.">
+  <div class="mt-8">
+    {posts.map((post) => (
+      <PostCard
+        title={post.data.title}
+        slug={post.slug}
+        date={post.data.date}
+        description={post.data.description}
+        tags={post.data.tags}
+        readingTime={readingTime(post.body)}
+      />
+    ))}
+  </div>
+  <Pagination currentPage={currentPage} totalPages={totalPages} prevUrl={prevUrl} nextUrl={nextUrl} />
+</BaseLayout>
