@@ -5,13 +5,6 @@ description: "Come ho costruito un ambiente di coding assistito da AI completame
 tags: ["AI", "workflow", "OpenCode", "Ollama", "sviluppo"]
 ---
 
-
-# Breve storia: Dalla disperazione con Claude Code al mio workflow di sviluppo con OpenCode e Ollama Cloud
-
-> Come ho costruito un ambiente di coding assistito da AI completamente autonomo, senza limiti di utilizzo e senza dipendenza da un singolo provider.
-
----
-
 ## La mia disperazione: i limiti di Claude Code
 
 Per diverso tempo ho usato Claude Code come strumento principale per il coding assistito nei miei progetti personali. Funziona bene — legge il codebase, esegue comandi, fa diff, apre sessioni contestuali. Il problema è arrivato con le progressive restrizioni ai limiti di utilizzo introdotte da Anthropic: finestre di contesto compresse, rate limit più stringenti, sessioni che si esauriscono nel mezzo di un task complesso.
