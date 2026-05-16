@@ -1,3 +1,11 @@
+---
+title: "Breve storia: Dalla disperazione con Claude Code al mio workflow di sviluppo con OpenCode e Ollama Cloud"
+date: 2026-05-16
+description: "Come ho costruito un ambiente di coding assistito da AI completamente autonomo, senza limiti di utilizzo e senza dipendenza da un singolo provider."
+tags: ["AI", "workflow", "OpenCode", "Ollama", "sviluppo"]
+---
+
+
 # Breve storia: Dalla disperazione con Claude Code al mio workflow di sviluppo con OpenCode e Ollama Cloud
 
 > Come ho costruito un ambiente di coding assistito da AI completamente autonomo, senza limiti di utilizzo e senza dipendenza da un singolo provider.
